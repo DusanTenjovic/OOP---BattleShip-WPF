@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="Battleship.Setup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Battleship"
+        mc:Ignorable ="d" Height="250" Width="350">
+    <Grid HorizontalAlignment="Left" Margin="0,0,0,0" Width="323">
+        <Button x:Name="btnPlay" Content="Play" HorizontalAlignment="Center" Height="42" Margin="121,164,108,0" Click="btnPlay_Click" Width="94" VerticalAlignment="Top" FontFamily="Stencil" FontSize="14.667" FontWeight="Bold" Background="#FF5284C0" BorderBrush="#FFC1C0E8" Foreground ="White" IsDefault="True"/>
+        <Label x:Name="lblDifficulty" Content="Izaberite matricu:" HorizontalAlignment="Center" Margin="105,96,96,0" VerticalAlignment="Top" FontFamily="Stencil" FontSize="14.667" Foreground="#FF5284C0"/>
+        <RadioButton x:Name="velicina_8" Click="velicina_8_Click" Content="8x8" Margin="77,128,172,0" VerticalAlignment="Top" IsChecked="True" HorizontalAlignment="Center" Width="74" FontFamily="Stencil" FontSize="13.667" />
+        <RadioButton x:Name="velicina_10" Click="velicina_10_Click" Content="10x10" Margin="138,128,78,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="107" FontFamily="Stencil" FontSize="13.667"/>
+        <RadioButton x:Name="velicina_12" Click="velicina_12_Click" Content="12x12" Margin="209,126,7,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="107" FontFamily="Stencil" FontSize="13.667"/>
+        <Label x:Name="lblWelcome" Content="Dobro dosli u BattleShip!" HorizontalAlignment="Center" Margin="64,16,63,0" VerticalAlignment="Top" FontFamily="Stencil" FontSize="16.667" Width="196" Foreground="#FF5284C0"/>
+        <Label x:Name="lblName" Content="Unesite svoje ime:" HorizontalAlignment="Center" Margin="102,39,57,0" VerticalAlignment="Top" FontFamily="Stencil" FontSize="14.667" Width="164"/>
+        <TextBox x:Name="txtboxName" HorizontalAlignment="Center" Height="24" Margin="105,70,96,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="122" FontFamily="Stencil" FontSize="14.667" Foreground="Brown" Background="White"/>
+    </Grid>
+</UserControl>
