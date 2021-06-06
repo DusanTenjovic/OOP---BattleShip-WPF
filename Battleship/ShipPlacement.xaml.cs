@@ -21,17 +21,78 @@ namespace Battleship
     {
         public event EventHandler play;
         Engine engine;
+        List<Button> sviDugmici = new List<Button>();
+        int igracNaPotezu = 0;
 
         public ShipPlacement(Engine engine)
         {
             InitializeComponent();
             this.engine = engine;
-            Ispis.Content = engine.Prikazi();
+            postaviDugmice(engine.velicina);
+            postaviBrodove(engine.velicina);
         }
 
-        private void btnNext_Click(object sender, RoutedEventArgs e)
+        void postaviDugmice(int velicina)
         {
-            play(this, e);
+            int vel = 30;
+            for (int i = 0; i < velicina; i++)
+            {
+                for (int j = 0; j < velicina; j++)
+                {
+                    Button b = new Button()
+                    {
+                        Height = 30,
+                        Width = 30,
+                        VerticalAlignment = 0,
+                        HorizontalAlignment = 0,
+                        Margin = new Thickness(50 + vel * i, 50 + vel * j, 0, 0),
+                        Content = i.ToString()                        
+                    };
+                    b.Click += btnClick;
+
+                    grid.Children.Add(b);
+                    sviDugmici.Add(b);
+                }
+            }
+        }
+
+        void postaviBrodove(int velicina)
+        {
+            if (velicina == 8)
+            {
+                
+            }
+            else if (velicina == 10)
+            {
+
+            }
+            else if (velicina == 12)
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("APOKALIPSA");
+            }
+        }
+
+
+        private void btnClick(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            //engine.PostaviDeoBroda(sviDugmici.IndexOf(button) % engine.velicina, sviDugmici.IndexOf(button) / engine.velicina);
+        }
+
+        void nacrtajDugme2()
+        {
+            Button b = new Button()
+            {
+                Height = 30,
+                Width = 30,
+                VerticalAlignment = 0,
+                HorizontalAlignment = 0,
+                Margin = new Thickness(50 , 50 , 0, 0)            
+            };
         }
     }
 }

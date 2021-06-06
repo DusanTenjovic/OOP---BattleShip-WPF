@@ -8,37 +8,62 @@ namespace Battleship
 {
     public class Engine
     {
-        private int[,] matrica1;
-        private int[,] matrica2;
+        private bool[,] matrica1;
+        private bool[,] matrica2;
 
-        List<int> velicineBrodova;
-        int N;
+        private string player1;
+        private string player2;
 
-        public Engine(int n)
+        int igracNaPotezu = 0;
+
+        public List<int> velicineBrodova;
+        public int velicina = 8;
+
+        public void NapraviMatricu()
         {
-            matrica1 = new int[n, n];
-            matrica2 = new int[n, n];
-            N = n;
-            if (n == 8)
+            matrica1 = new bool[velicina + 2, velicina + 2];
+            matrica2 = new bool[velicina + 2, velicina + 2];
+            
+            if (velicina == 8)
             {
                 velicineBrodova = new List<int>() { 4, 3, 2, 2 };
-                this.N = 8;
             }
-            else if (n == 10)
+            else if (velicina == 10)
             {
                 velicineBrodova = new List<int>() { 5, 4, 3, 3, 2, 2, 2 };
-                this.N = 10;
             }
             else
             {
                 velicineBrodova = new List<int>() { 6, 5, 4, 4, 3, 3, 2, 2 };
-                this.N = 12;
             }
+        }
+
+        //public bool postavideobroda(int x, int y)
+        //{
+        //    if (igracNaPotezu % 2 == 0)
+        //    {
+
+        //    }
+        //}
+
+        public void PostaviVelicinu(int velicina)
+        {
+            this.velicina = velicina;
+        }
+
+        public void PostaviImeIgraca(string ime, int brojIgraca)
+        {
+            if (brojIgraca == 1)
+            {
+                player1 = ime;
+            }
+            else
+                player2 = ime;
         }
 
         public string Prikazi()
         {
-            return N.ToString();
+            return velicina.ToString();
         }
     }
 }

@@ -29,22 +29,23 @@ namespace Battleship
 
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
+
             play(this, e);
         }
 
         private void velicina_8_Click(object sender, RoutedEventArgs e)
         {
-
+            engine.PostaviVelicinu(8);
         }
 
         private void velicina_10_Click(object sender, RoutedEventArgs e)
         {
-            
+            engine.PostaviVelicinu(10);
         }
 
         private void velicina_12_Click(object sender, RoutedEventArgs e)
         {
-            
+            engine.PostaviVelicinu(12);
         }
     }
 }

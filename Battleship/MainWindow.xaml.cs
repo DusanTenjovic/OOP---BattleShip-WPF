@@ -20,7 +20,7 @@ namespace Battleship
     public partial class MainWindow : Window
     {
         Grid grid = new Grid();
-        public Engine engine = new Engine(8);
+        public Engine engine = new Engine();
 
         Setup setup;
         ShipPlacement shipPlacement;
@@ -40,29 +40,10 @@ namespace Battleship
             this.Height = 300;
             this.Width = 330;
 
-            //setup = new Setup(engine);
-            //grid.Children.Add(setup);
-
-            int vel = 50;
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 10; j++)
-                {
-                    Button b = new Button()
-                    {
-                        Height = 30,
-                        Width = 50,
-
-                        VerticalAlignment = 0,
-                        HorizontalAlignment = 0,
-                        Margin = new Thickness(vel + vel * i, vel + 30*j, 0, 0),
-                        Content = i.ToString()
-                    };
-                    grid.Children.Add(b);
-                }
-            }
+            setup = new Setup(engine);
+            grid.Children.Add(setup);            
             
-            //setup.play += new EventHandler(shipSetup);
+            setup.play += new EventHandler(shipSetup);
         }
 
         private void shipSetup(object sender, EventArgs e)
@@ -85,7 +66,6 @@ namespace Battleship
         {
             grid.Children.Clear();
             InitializeGame();
-        }
-       
+        }       
     }
 }

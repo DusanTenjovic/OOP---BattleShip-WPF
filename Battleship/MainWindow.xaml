@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Battleship"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="350">
+        Title="MainWindow" Height="350" Width="350"
+        WindowState="Maximized"
+        WindowStyle="SingleBorderWindow">
     <Grid>
 
     </Grid>
