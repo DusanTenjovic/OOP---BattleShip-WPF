@@ -59,13 +59,13 @@ namespace Battleship
 
             grid.Children.Add(shipPlacement); 
 
-            shipPlacement.play += new EventHandler(ponovo);
+            //shipPlacement.play += new EventHandler(ponovo);
         }
 
-        private void ponovo(object sender, EventArgs e)
-        {
-            grid.Children.Clear();
-            InitializeGame();
-        }       
+        //private void ponovo(object sender, EventArgs e)
+        //{
+        //    grid.Children.Clear();
+        //    InitializeGame();
+        //}       
     }
 }

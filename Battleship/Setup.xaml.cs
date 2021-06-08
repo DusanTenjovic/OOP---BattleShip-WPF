@@ -22,14 +22,12 @@ namespace Battleship
         public Setup(Engine engine)
         {
             InitializeComponent();
-            this.engine = engine;
-
-            
+            this.engine = engine;      
         }
 
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
-
+            engine.NapraviMatricu();
             play(this, e);
         }
 

@@ -62,15 +62,32 @@ namespace Battleship
         {
             if (velicina == 8)
             {
-                nacrtajDugme2();
+                nacrtajDugme2(1);
+                nacrtajDugme3(2);
+                nacrtajDugme4(3);
+                nacrtajDugme5(4);
+                nacrtajDugme6(5);
             }
             else if (velicina == 10)
             {
-
+                nacrtajDugme2(1);
+                nacrtajDugme2(2);
+                nacrtajDugme2(3);
+                nacrtajDugme3(4);
+                nacrtajDugme3(5);
+                nacrtajDugme4(6);
+                nacrtajDugme5(7);
             }
             else if (velicina == 12)
             {
-
+                nacrtajDugme2(1);
+                nacrtajDugme2(2);
+                nacrtajDugme3(3);
+                nacrtajDugme3(4);
+                nacrtajDugme4(5);
+                nacrtajDugme4(6);
+                nacrtajDugme5(7);
+                nacrtajDugme6(8);
             }
             else
             {
@@ -78,74 +95,106 @@ namespace Battleship
             }
         }
 
-
         private void btnClick(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
-            //engine.PostaviDeoBroda(sviDugmici.IndexOf(button) % engine.velicina, sviDugmici.IndexOf(button) / engine.velicina);
+            if (engine.limit-- > 0)
+            {
+                engine.PostaviDeoBroda((sviDugmici.IndexOf(button) % engine.velicina) + 1, (sviDugmici.IndexOf(button) / engine.velicina) + 1);
+                Console.WriteLine((sviDugmici.IndexOf(button) % engine.velicina) + 1);
+                Console.WriteLine((sviDugmici.IndexOf(button) / engine.velicina) + 1);
+                Console.WriteLine();
+            }
         }
 
-        void nacrtajDugme2()
+        int duz = 850;
+        int vis = 252;
+        int vel = 30;
+        int razmak = 20;
+
+        void nacrtajDugme2(int x)
         {
             Button b = new Button()
             {
-                Height = screenHeight / 38.4,
-                Width = screenWidth / 19.2,
+                Height = 2 * vel,
+                Width = vel,
                 VerticalAlignment = 0,
                 HorizontalAlignment = 0,
-                Margin = new Thickness(screenWidth * 5 / 7, screenHeight * 5 / 7, 0, 0),
-                Content = "dvojka"
+                Margin = new Thickness(duz + x * vel + razmak * x, vis - x * vel, 0, 0),
+                Content = "2"
             };
+            b.Click += click_2;
             grid.Children.Add(b);
         }
-        
-        void nacrtajDugme3()
+
+        private void click_2(object sender, RoutedEventArgs e) => engine.PostaviBrod(2);
+
+        void nacrtajDugme3(int x)
         {
             Button b = new Button()
             {
-                Height = 100,
-                Width = 300,
+                Height = 3 * vel,
+                Width = vel,
                 VerticalAlignment = 0,
                 HorizontalAlignment = 0,
-                Margin = new Thickness(50, 50, 0, 0),
-                Content = "trojka"
+                Margin = new Thickness(duz + x * vel + razmak * x, vis - x * vel, 0, 0),
+                Content = "3"
             };
+            b.Click += click_3;
+            grid.Children.Add(b);
         }
-        void nacrtajDugme4()
+
+        private void click_3(object sender, RoutedEventArgs e) => engine.PostaviBrod(3);
+
+        void nacrtajDugme4(int x)
         {
             Button b = new Button()
             {
-                Height = 30,
-                Width = 30,
+                Height = 4 * vel,
+                Width = vel,
                 VerticalAlignment = 0,
                 HorizontalAlignment = 0,
-                Margin = new Thickness(50, 50, 0, 0),
-                Content = "cetvorka"
+                Margin = new Thickness(duz + x * vel + razmak * x, vis - x * vel, 0, 0),
+                Content = "4"
             };
+            b.Click += click_4;
+            grid.Children.Add(b);
         }
-        void nacrtajDugme5()
+
+        private void click_4(object sender, RoutedEventArgs e) => engine.PostaviBrod(4);
+
+        void nacrtajDugme5(int x)
         {
             Button b = new Button()
             {
-                Height = 30,
-                Width = 30,
+                Height = 5 * vel,
+                Width = vel,
                 VerticalAlignment = 0,
                 HorizontalAlignment = 0,
-                Margin = new Thickness(50, 50, 0, 0),
-                Content = "petica"
+                Margin = new Thickness(duz + x * vel + razmak * x, vis - x * vel, 0, 0),
+                Content = "5"
             };
+            b.Click += click_5;
+            grid.Children.Add(b);
         }
-        void nacrtajDugme6()
+
+        private void click_5(object sender, RoutedEventArgs e) => engine.PostaviBrod(5);
+
+        void nacrtajDugme6(int x)
         {
             Button b = new Button()
             {
-                Height = 30,
-                Width = 30,
+                Height = 6 * vel,
+                Width = vel,
                 VerticalAlignment = 0,
                 HorizontalAlignment = 0,
-                Margin = new Thickness(50, 50, 0, 0),
-                Content = "sestica"
+                Margin = new Thickness(duz + x * vel + razmak * x, vis - x * vel, 0, 0),
+                Content = "6"
             };
+            b.Click += click_6;
+            grid.Children.Add(b);
         }
+
+        private void click_6(object sender, RoutedEventArgs e) => engine.PostaviBrod(6);
     }
 }
