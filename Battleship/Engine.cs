@@ -9,7 +9,7 @@ namespace Battleship
 {
     public class Engine
     {
-        private bool[,] matrica_zauzeta_0;
+        public bool[,] matrica_zauzeta_0;
         private bool[,] matrica_zauzeta_1;
 
         private bool[,] matrica_brodova_0;
@@ -47,35 +47,39 @@ namespace Battleship
         }
 
         public int limit = 0;
+        public bool trn = false;
         public void PostaviBrod(int x)
         {
             if (velicineBrodova.Contains(x))
             {
                 limit = x;
+                trn = true;
                 velicineBrodova.Remove(x);
             }
             else
                 MessageBox.Show("Nema takvog broda");
         }
 
-        public void PostaviDeoBroda(int x, int y)
+        public bool PostaviDeoBroda(int x, int y)
         {
             if (igracNaPotezu % 2 == 0)
             {
-                if (!matrica_zauzeta_0[x,y])
+                if (!matrica_zauzeta_0[x, y])
                 {
                     matrica_zauzeta_0[x, y] = true;
                     matrica_zauzeta_0[x - 1, y + 1] = true;
-                    matrica_zauzeta_0[x, y+1] = true;
-                    matrica_zauzeta_0[x+1, y+1] = true;
-                    matrica_zauzeta_0[x-1, y] = true;
-                    matrica_zauzeta_0[x+1, y] = true;
-                    matrica_zauzeta_0[x-1, y-1] = true;
-                    matrica_zauzeta_0[x, y-1] = true;
-                    matrica_zauzeta_0[x+1, y-1] = true;
+                    matrica_zauzeta_0[x, y + 1] = true && !trn;
+                    matrica_zauzeta_0[x + 1, y + 1] = true;
+                    matrica_zauzeta_0[x - 1, y] = true && !trn;
+                    matrica_zauzeta_0[x + 1, y] = true && !trn;
+                    matrica_zauzeta_0[x - 1, y - 1] = true;
+                    matrica_zauzeta_0[x, y - 1] = true && !trn;
+                    matrica_zauzeta_0[x + 1, y - 1] = true;
 
                     matrica_brodova_0[x, y] = true;
+                    return true;
                 }
+                else return false;
             }
             else
             {
@@ -92,7 +96,9 @@ namespace Battleship
                     matrica_zauzeta_1[x + 1, y - 1] = true;
 
                     matrica_brodova_1[x, y] = true;
+                    return true;
                 }
+                else return false;
             }
         }
 

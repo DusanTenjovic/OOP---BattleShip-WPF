@@ -32,6 +32,28 @@ namespace Battleship
             this.engine = engine;
             postaviDugmice(engine.velicina);
             postaviBrodove(engine.velicina);
+            
+        }
+
+        private void postaviDebug(int velicina)
+        {
+            for (int i = 0; i < velicina; i++)
+            {
+                for (int j = 0; j < velicina; j++)
+                {
+                    Button b = new Button()
+                    {
+                        Height = 20,
+                        Width = 20,
+                        VerticalAlignment = 0,
+                        HorizontalAlignment = 0,
+                        Margin = new Thickness(12 * screenWidth / 15 + vel * i, 10 * screenHeight / 15 + vel * j, 0, 0),
+                        Content = i.ToString(),
+                        Background = engine.matrica_zauzeta_0[i + 1, j + 1] ? Brushes.Red : Brushes.Blue
+                    };
+                    grid.Children.Add(b);
+                }
+            }
         }
 
         void postaviDugmice(int velicina)
@@ -94,17 +116,36 @@ namespace Battleship
                 MessageBox.Show("APOKALIPSA");
             }
         }
-
+        int trnX = 1;
+        int trnY = 1;
         private void btnClick(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
             if (engine.limit-- > 0)
             {
-                engine.PostaviDeoBroda((sviDugmici.IndexOf(button) % engine.velicina) + 1, (sviDugmici.IndexOf(button) / engine.velicina) + 1);
-                Console.WriteLine((sviDugmici.IndexOf(button) % engine.velicina) + 1);
-                Console.WriteLine((sviDugmici.IndexOf(button) / engine.velicina) + 1);
-                Console.WriteLine();
+                if (engine.PostaviDeoBroda((sviDugmici.IndexOf(button) / engine.velicina) + 1, (sviDugmici.IndexOf(button) % engine.velicina) + 1))
+                {
+                    //Console.WriteLine(trnX.ToString(), " ", trnY.ToString());
+                    if ((((sviDugmici.IndexOf(button) / engine.velicina) + 1 + trnX) % 2 == 1) ||
+                        (((sviDugmici.IndexOf(button) % engine.velicina) + 1 + trnY) % 2 == 1))
+                    {
+                        button.Background = Brushes.Gray;
+                        trnX = (sviDugmici.IndexOf(button) / engine.velicina) + 1;
+                        trnY = (sviDugmici.IndexOf(button) % engine.velicina) + 1;
+                    }
+                }
+                else engine.limit++;
+                //Console.Write((sviDugmici.IndexOf(button) % engine.velicina) + 1);
+                //Console.WriteLine((sviDugmici.IndexOf(button) / engine.velicina) + 1);
+                //Console.WriteLine();
+            }         
+            else
+            {
+                engine.trn = false;
+                Console.WriteLine(engine.limit);
+                MessageBox.Show("Za trenutni brod su postavljena sva polja...");                
             }
+            postaviDebug(engine.velicina);
         }
 
         int duz = 850;
