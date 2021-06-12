@@ -7,12 +7,18 @@ using System.Windows;
 
 namespace Battleship
 {
+    public struct Polje
+    {
+        public int x;
+        public int y;
+    }
+
     public class Engine
     {
         public bool[,] matrica_zauzeta_0;
         private bool[,] matrica_zauzeta_1;
 
-        private bool[,] matrica_brodova_0;
+        public bool[,] matrica_brodova_0;
         private bool[,] matrica_brodova_1;
 
         private string player1;
@@ -22,7 +28,8 @@ namespace Battleship
 
         public List<int> velicineBrodova;
         public int velicina = 8;
-
+        
+        public List<Polje> TrenutniBrod = new List<Polje>();
 
         public void NapraviMatricu()
         {
@@ -52,6 +59,7 @@ namespace Battleship
         {
             if (velicineBrodova.Contains(x))
             {
+                UokviriBrod();
                 limit = x;
                 trn = true;
                 velicineBrodova.Remove(x);
@@ -120,6 +128,30 @@ namespace Battleship
         public string Prikazi()
         {
             return velicina.ToString();
+        }
+        
+        public void UokviriBrod()
+        {
+            if (TrenutniBrod.Count() != 0 )
+            {
+                int minX = TrenutniBrod.Min(polje => polje.x);
+                int minY = TrenutniBrod.Min(polje => polje.y);
+                int maxX = TrenutniBrod.Max(polje => polje.x);
+                int maxY = TrenutniBrod.Max(polje => polje.y);
+
+                for (int i = minX - 1; i <= maxX + 1; i++)
+                {
+                    for (int j = minY - 1; j <= maxY + 1; j++)
+                    {
+                        if (igracNaPotezu%2 ==0)
+                        {
+                            matrica_zauzeta_0[i, j] = true;
+                        }
+                        else
+                            matrica_zauzeta_1[i, j] = true;
+                    }
+                }
+            }
         }
     }
 }

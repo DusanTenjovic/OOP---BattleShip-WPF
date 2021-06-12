@@ -56,6 +56,27 @@ namespace Battleship
             }
         }
 
+        private void postaviDebug_2(int velicina)
+        {
+            for (int i = 0; i < velicina; i++)
+            {
+                for (int j = 0; j < velicina; j++)
+                {
+                    Button b = new Button()
+                    {
+                        Height = 20,
+                        Width = 20,
+                        VerticalAlignment = 0,
+                        HorizontalAlignment = 0,
+                        Margin = new Thickness(10 * screenWidth / 15 + vel * i, 10 * screenHeight / 15 + vel * j, 0, 0),
+                        Content = i.ToString(),
+                        Background = engine.matrica_brodova_0[i + 1, j + 1] ? Brushes.Red : Brushes.Blue
+                    };
+                    grid.Children.Add(b);
+                }
+            }
+        }
+
         void postaviDugmice(int velicina)
         {
             int vel = 70;
@@ -118,20 +139,28 @@ namespace Battleship
         }
         int trnX = 1;
         int trnY = 1;
+
         private void btnClick(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
             if (engine.limit-- > 0)
             {
-                if (engine.PostaviDeoBroda((sviDugmici.IndexOf(button) / engine.velicina) + 1, (sviDugmici.IndexOf(button) % engine.velicina) + 1))
+                int x = (sviDugmici.IndexOf(button) / engine.velicina) + 1;
+                int y = (sviDugmici.IndexOf(button) % engine.velicina) + 1;
+
+                if (engine.PostaviDeoBroda(x, y))
                 {
                     //Console.WriteLine(trnX.ToString(), " ", trnY.ToString());
-                    if ((((sviDugmici.IndexOf(button) / engine.velicina) + 1 + trnX) % 2 == 1) ||
-                        (((sviDugmici.IndexOf(button) % engine.velicina) + 1 + trnY) % 2 == 1))
+                    if (((x + trnX) % 2 == 1) ||
+                        ((y + trnY) % 2 == 1))
                     {
+                        engine.matrica_brodova_0[x, y] = true;
                         button.Background = Brushes.Gray;
-                        trnX = (sviDugmici.IndexOf(button) / engine.velicina) + 1;
-                        trnY = (sviDugmici.IndexOf(button) % engine.velicina) + 1;
+                        button.Content = "MARS";
+                        trnX = x;
+                        trnY = y;
+                        Polje polje = new Polje() { x = x, y = y };
+                        engine.TrenutniBrod.Add(polje);
                     }
                 }
                 else engine.limit++;
@@ -146,6 +175,7 @@ namespace Battleship
                 MessageBox.Show("Za trenutni brod su postavljena sva polja...");                
             }
             postaviDebug(engine.velicina);
+            postaviDebug_2(engine.velicina);
         }
 
         int duz = 850;
