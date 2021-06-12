@@ -51,7 +51,6 @@ namespace Battleship
                         Content = i.ToString()                        
                     };
                     b.Click += btnClick;
-
                     grid.Children.Add(b);
                     sviDugmici.Add(b);
                 }
@@ -98,14 +97,56 @@ namespace Battleship
         private void btnClick(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
-            if (engine.limit-- > 0)
+            
+            if (engine.PostaviDeoBroda((sviDugmici.IndexOf(button) / engine.velicina) + 1, (sviDugmici.IndexOf(button) % engine.velicina) + 1))
+                button.Background = Brushes.Gray;
+            engine.KompletanBrod();
+            postaviDebug(engine.velicina);
+            postaviDebug_2(engine.velicina);
+        }
+
+        private void postaviDebug(int velicina)
+        {
+            for (int i = 0; i < velicina; i++)
             {
-                engine.PostaviDeoBroda((sviDugmici.IndexOf(button) % engine.velicina) + 1, (sviDugmici.IndexOf(button) / engine.velicina) + 1);
-                Console.WriteLine((sviDugmici.IndexOf(button) % engine.velicina) + 1);
-                Console.WriteLine((sviDugmici.IndexOf(button) / engine.velicina) + 1);
-                Console.WriteLine();
+                for (int j = 0; j < velicina; j++)
+                {
+                    Button b = new Button()
+                    {
+                        Height = 20,
+                        Width = 20,
+                        VerticalAlignment = 0,
+                        HorizontalAlignment = 0,
+                        Margin = new Thickness(12 * screenWidth / 15 + vel * i, 10 * screenHeight / 15 + vel * j, 0, 0),
+                        Content = i.ToString(),
+                        Background = engine.matrica_zauzeta_0[i + 1, j + 1] ? Brushes.Red : Brushes.Blue
+                    };
+                    grid.Children.Add(b);
+                }
             }
         }
+
+        private void postaviDebug_2(int velicina)
+        {
+            for (int i = 0; i < velicina; i++)
+            {
+                for (int j = 0; j < velicina; j++)
+                {
+                    Button b = new Button()
+                    {
+                        Height = 20,
+                        Width = 20,
+                        VerticalAlignment = 0,
+                        HorizontalAlignment = 0,
+                        Margin = new Thickness(9 * screenWidth / 15 + vel * i, 10 * screenHeight / 15 + vel * j, 0, 0),
+                        Content = i.ToString(),
+                        Background = engine.matrica_brodova_0[i + 1, j + 1] ? Brushes.Red : Brushes.Blue
+                    };
+                    grid.Children.Add(b);
+                }
+            }
+        }
+
 
         int duz = 850;
         int vis = 252;
