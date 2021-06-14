@@ -25,9 +25,11 @@ namespace Battleship
             this.engine = engine;      
         }
 
-        private void btnPlay_Click(object sender, RoutedEventArgs e)
+        public void btnPlay_Click(object sender, RoutedEventArgs e)
         {
             engine.NapraviMatricu();
+            engine.player0 = txtLetterInput.Text.Trim();
+            engine.player1 = txtLetterInput_Copy.Text.Trim();
             play(this, e);
         }
 

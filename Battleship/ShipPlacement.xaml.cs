@@ -30,8 +30,17 @@ namespace Battleship
         {
             InitializeComponent();
             this.engine = engine;
+            ispisIgraca.Content = engine.VratiImeIgraca();
             postaviDugmice(engine.velicina);
             postaviBrodove(engine.velicina);
+        }
+
+        private void btnNextPlayer_CLick (object sender, RoutedEventArgs e)
+        {
+            engine.UokviriBrod();
+            engine.igracNaPotezu++;
+            engine.NapraviMatricu();
+            play(this, e);
         }
 
         void postaviDugmice(int velicina)
@@ -101,6 +110,10 @@ namespace Battleship
             if (engine.PostaviDeoBroda((sviDugmici.IndexOf(button) / engine.velicina) + 1, (sviDugmici.IndexOf(button) % engine.velicina) + 1))
                 button.Background = Brushes.Gray;
             engine.KompletanBrod();
+            //if (engine.ProveriZaKrajPostavljanja())
+            //{
+
+            //}            
             postaviDebug(engine.velicina);
             postaviDebug_2(engine.velicina);
         }
@@ -119,7 +132,7 @@ namespace Battleship
                         HorizontalAlignment = 0,
                         Margin = new Thickness(12 * screenWidth / 15 + vel * i, 10 * screenHeight / 15 + vel * j, 0, 0),
                         Content = i.ToString(),
-                        Background = engine.matrica_zauzeta_0[i + 1, j + 1] ? Brushes.Red : Brushes.Blue
+                        Background = engine.KojiJeIgrac(i+1, j+1) ? Brushes.Red : Brushes.Blue
                     };
                     grid.Children.Add(b);
                 }
@@ -140,7 +153,7 @@ namespace Battleship
                         HorizontalAlignment = 0,
                         Margin = new Thickness(9 * screenWidth / 15 + vel * i, 10 * screenHeight / 15 + vel * j, 0, 0),
                         Content = i.ToString(),
-                        Background = engine.matrica_brodova_0[i + 1, j + 1] ? Brushes.Red : Brushes.Blue
+                        Background = engine.KojiJeBrod(i+1, j+1) ? Brushes.Red : Brushes.Blue
                     };
                     grid.Children.Add(b);
                 }

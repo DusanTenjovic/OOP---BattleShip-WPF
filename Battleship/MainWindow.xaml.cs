@@ -24,6 +24,7 @@ namespace Battleship
 
         Setup setup;
         ShipPlacement shipPlacement;
+        MainGame mainGame;
 
         public MainWindow()
         {
@@ -59,7 +60,37 @@ namespace Battleship
 
             grid.Children.Add(shipPlacement); 
 
-            //shipPlacement.play += new EventHandler(ponovo);
+            shipPlacement.play += new EventHandler(NextShipPlacement);
+        }
+
+        private void NextShipPlacement(object sender, EventArgs e)
+        {
+            grid.Children.Clear();
+
+            this.MinWidth = 460;
+            this.MinHeight = 530;
+            this.Width = 460;
+            this.Height = 530;
+
+            shipPlacement = new ShipPlacement(engine);
+            grid.Children.Add(shipPlacement);
+
+            shipPlacement.play += new EventHandler(Igra);
+        }
+
+        private void Igra(object sender, EventArgs e)
+        {
+            grid.Children.Clear();
+
+            this.MinWidth = 460;
+            this.MinHeight = 530;
+            this.Width = 460;
+            this.Height = 530;
+
+            mainGame = new MainGame(engine);
+            grid.Children.Add(mainGame);
+
+            mainGame.play += new EventHandler(Igra);
         }
 
         //private void ponovo(object sender, EventArgs e)

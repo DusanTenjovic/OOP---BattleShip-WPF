@@ -22,34 +22,67 @@ namespace Battleship
         public bool[,] matrica_brodova_0;
         public bool[,] matrica_brodova_1;
         
-        private string player1;
-        private string player2;
+        public string player0 = "Igrac 1";
+        public string player1 = "Igrac 2";
 
-        int igracNaPotezu = 0;
+        int brojPogodjenih_0;
+        int brojPogodjenih_1;
+
+        public int igracNaPotezu = 0;
+
+        public bool KojiJeIgrac(int i, int j)
+        {
+            if (igracNaPotezu == 0) return matrica_zauzeta_0[i, j];
+            else return matrica_zauzeta_1[i, j];
+        }
+
+        public bool KojiJeBrod(int i, int j)
+        {
+            if (igracNaPotezu == 0) return matrica_brodova_0[i, j];
+            else return matrica_brodova_1[i, j];
+        }
 
         public List<int> velicineBrodova;
+        int brojSegmenata;
         public int velicina = 8;
 
 
         public void NapraviMatricu()
         {
-            matrica_zauzeta_0 = new bool[velicina + 2, velicina + 2]; // Defaultno je false...
-            matrica_zauzeta_1 = new bool[velicina + 2, velicina + 2];
+            if (igracNaPotezu == 0)
+            {
+                matrica_zauzeta_0 = new bool[velicina + 2, velicina + 2];
+                matrica_brodova_0 = new bool[velicina + 2, velicina + 2];
+                prethodniPostavljen = true;
 
-            matrica_brodova_0 = new bool[velicina + 2, velicina + 2];
-            matrica_brodova_1 = new bool[velicina + 2, velicina + 2];
+                PostaviVelicineBrodova();
+            }
+            else
+            {
+                matrica_brodova_1 = new bool[velicina + 2, velicina + 2];
+                matrica_zauzeta_1 = new bool[velicina + 2, velicina + 2];
+                prethodniPostavljen = true;
 
+                PostaviVelicineBrodova();
+            }
+        }
+
+        private void PostaviVelicineBrodova()
+        {
             if (velicina == 8)
             {
                 velicineBrodova = new List<int>() { 4, 3, 2, 2 };
+                brojSegmenata = 11;
             }
             else if (velicina == 10)
             {
                 velicineBrodova = new List<int>() { 5, 4, 3, 3, 2, 2, 2 };
+                brojSegmenata = 21;
             }
             else
             {
                 velicineBrodova = new List<int>() { 6, 5, 4, 4, 3, 3, 2, 2 };
+                brojSegmenata = 29;
             }
         }
 
@@ -93,35 +126,39 @@ namespace Battleship
                 {
                     if (!prviKorakBroda)
                     {
-                        Console.WriteLine("Nije prvi korak");
-                        if (((Math.Abs(x - trnX) == 1) && y == trnY) ||
+                        foreach (Polje polje in TrenutniBrod)
+                        {
+                            trnX = polje.x;
+                            trnY = polje.y;
+                            if (((Math.Abs(x - trnX) == 1) && y == trnY) ||
                             ((Math.Abs(y - trnY) == 1) && x == trnX))
-                        {
-                            Console.WriteLine("jeste sused");
-                            trnX = x;
-                            trnY = y;
-                            matrica_brodova_0[x, y] = true;
-                            Polje polje = new Polje() { x = x, y = y };
-                            TrenutniBrod.Add(polje);
+                            {
 
-                            matrica_zauzeta_0[x, y] = true;
+                                trnX = x;
+                                trnY = y;
+                                matrica_brodova_0[x, y] = true;
+                                Polje polje1 = new Polje() { x = x, y = y };
+                                TrenutniBrod.Add(polje1);
 
-                            matrica_zauzeta_0[x - 1, y + 1] = true;
-                            matrica_zauzeta_0[x, y + 1] = (true && !trn) || matrica_zauzeta_0[x, y + 1];
-                            matrica_zauzeta_0[x + 1, y + 1] = true;
-                            matrica_zauzeta_0[x - 1, y] = (true && !trn) || matrica_zauzeta_0[x - 1, y];
-                            matrica_zauzeta_0[x + 1, y] = (true && !trn) || matrica_zauzeta_0[x + 1, y];
-                            matrica_zauzeta_0[x - 1, y - 1] = true;
-                            matrica_zauzeta_0[x, y - 1] = (true && !trn) || matrica_zauzeta_0[x, y - 1];
-                            matrica_zauzeta_0[x + 1, y - 1] = true;
+                                matrica_zauzeta_0[x, y] = true;
 
-                            return true;
+                                matrica_zauzeta_0[x - 1, y + 1] = true;
+                                matrica_zauzeta_0[x, y + 1] = (true && !trn) || matrica_zauzeta_0[x, y + 1];
+                                matrica_zauzeta_0[x + 1, y + 1] = true;
+                                matrica_zauzeta_0[x - 1, y] = (true && !trn) || matrica_zauzeta_0[x - 1, y];
+                                matrica_zauzeta_0[x + 1, y] = (true && !trn) || matrica_zauzeta_0[x + 1, y];
+                                matrica_zauzeta_0[x - 1, y - 1] = true;
+                                matrica_zauzeta_0[x, y - 1] = (true && !trn) || matrica_zauzeta_0[x, y - 1];
+                                matrica_zauzeta_0[x + 1, y - 1] = true;
+
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
                         }
-                        else
-                        {
-                            Console.WriteLine("nije sused");
-                            return false;                            
-                        }
+                        return false;
                     }
                     else
                     {
@@ -162,54 +199,67 @@ namespace Battleship
                 {
                     if (!prviKorakBroda)
                     {
-                        if ((Math.Abs(x - trnX) == 1) || (Math.Abs(y - trnY) == 1))
+                        foreach (Polje polje1 in TrenutniBrod)
                         {
-                            trnX = x;
-                            trnY = y;
-                            matrica_brodova_1[x, y] = true;
+                            trnX = polje1.x;
+                            trnY = polje1.y;
 
-                            matrica_zauzeta_1[x, y] = true;
-                            matrica_zauzeta_1[x - 1, y + 1] = true;
-                            matrica_zauzeta_1[x, y + 1] = true && !trn || matrica_zauzeta_1[x, y + 1];
-                            matrica_zauzeta_1[x + 1, y + 1] = true;
-                            matrica_zauzeta_1[x - 1, y] = true && !trn || matrica_zauzeta_1[x - 1, y];
-                            matrica_zauzeta_1[x + 1, y] = true && !trn || matrica_zauzeta_1[x + 1, y];
-                            matrica_zauzeta_1[x - 1, y - 1] = true;
-                            matrica_zauzeta_1[x, y - 1] = true && !trn || matrica_zauzeta_1[x, y - 1];
-                            matrica_zauzeta_1[x + 1, y - 1] = true;
+                            if (((Math.Abs(x - trnX) == 1) && y == trnY) ||
+                            ((Math.Abs(y - trnY) == 1) && x == trnX))
+                            {
+                                trnX = x;
+                                trnY = y;
+                                Polje polje = new Polje() { x = x, y = y };
+                                TrenutniBrod.Add(polje);
 
-                            return true;
+                                matrica_zauzeta_1[x, y] = true;
+
+                                matrica_zauzeta_1[x - 1, y + 1] = true;
+                                matrica_zauzeta_1[x, y + 1] = (true && !trn) || matrica_zauzeta_1[x, y + 1];
+                                matrica_zauzeta_1[x + 1, y + 1] = true;
+                                matrica_zauzeta_1[x - 1, y] = (true && !trn) || matrica_zauzeta_1[x - 1, y];
+                                matrica_zauzeta_1[x + 1, y] = (true && !trn) || matrica_zauzeta_1[x + 1, y];
+                                matrica_zauzeta_1[x - 1, y - 1] = true;
+                                matrica_zauzeta_1[x, y - 1] = (true && !trn) || matrica_zauzeta_1[x, y - 1];
+                                matrica_zauzeta_1[x + 1, y - 1] = true;
+
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
                         }
-                        else
-                        {
-                            return false;
-                        }
+                        return false;
+
                     }
                     else
                     {
                         prviKorakBroda = false;
-
+                        prethodniPostavljen = false;
+                        Console.WriteLine("Prvi korak");
                         trnX = x;
                         trnY = y;
-                        matrica_brodova_1[x, y] = true;
+                        Polje polje = new Polje() { x = x, y = y };
+                        TrenutniBrod.Add(polje);
 
                         matrica_zauzeta_1[x, y] = true;
+
                         matrica_zauzeta_1[x - 1, y + 1] = true;
-                        matrica_zauzeta_1[x, y + 1] = true && !trn || matrica_zauzeta_1[x, y + 1];
+                        matrica_zauzeta_1[x, y + 1] = (true && !trn) || matrica_zauzeta_1[x, y + 1];
                         matrica_zauzeta_1[x + 1, y + 1] = true;
-                        matrica_zauzeta_1[x - 1, y] = true && !trn || matrica_zauzeta_1[x - 1, y];
-                        matrica_zauzeta_1[x + 1, y] = true && !trn || matrica_zauzeta_1[x + 1, y];
+                        matrica_zauzeta_1[x - 1, y] = (true && !trn) || matrica_zauzeta_1[x - 1, y];
+                        matrica_zauzeta_1[x + 1, y] = (true && !trn) || matrica_zauzeta_1[x + 1, y];
                         matrica_zauzeta_1[x - 1, y - 1] = true;
-                        matrica_zauzeta_1[x, y - 1] = true && !trn || matrica_zauzeta_1[x, y - 1];
+                        matrica_zauzeta_1[x, y - 1] = (true && !trn) || matrica_zauzeta_1[x, y - 1];
                         matrica_zauzeta_1[x + 1, y - 1] = true;
 
                         return true;
                     }
-                    
                 }
                 else
                 {
-                    trn = false;
+                    trn = true;
                     MessageBox.Show("Nije validan potez!");
                     return false;
                 }
@@ -225,6 +275,8 @@ namespace Battleship
                 int maxX = TrenutniBrod.Max(polje => polje.x);
                 int maxY = TrenutniBrod.Max(polje => polje.y);
 
+                Console.WriteLine(minX);
+                Console.WriteLine(minY);
                 for (int i = minX - 1; i <= maxX + 1; i++)
                 {
                     for (int j = minY - 1; j <= maxY + 1; j++)
@@ -246,19 +298,75 @@ namespace Battleship
             this.velicina = velicina;
         }
 
-        public void PostaviImeIgraca(string ime, int brojIgraca)
+        public string VratiImeIgraca()
         {
-            if (brojIgraca == 1)
+            if (igracNaPotezu % 2 == 0)
             {
-                player1 = ime;
+                return player0;
             }
             else
-                player2 = ime;
+                return player1;
         }
 
-        public string Prikazi()
+        //-------------------------------------------//
+
+        public bool PotopiBrod(int x, int y)
         {
-            return velicina.ToString();
+            if (igracNaPotezu % 2 == 0)
+            {
+                if (matrica_brodova_0[x, y])
+                {
+                    brojPogodjenih_0++;
+                    return true;
+                }
+                else return false;
+            }
+            else
+            {
+                if (matrica_brodova_1[x, y])
+                {
+                    brojPogodjenih_1++;
+                    return true;
+                }
+                else return false;
+            }
         }
+
+        //public bool ProveriZaKrajPostavljanja()
+        //{
+        //    if (igracNaPotezu % 2 == 0)
+        //    {
+        //        if (matrica_brodova_0.ToList().Count(x => x = true);
+        //        {
+        //            return true;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if (brojPogodjenih_1 == brojSegmenata)
+        //        {
+
+        //        }
+        //    }
+        //}
+
+        public void ProveriZaKraj()
+        {
+            if (igracNaPotezu % 2 == 0)
+            {
+                if (brojPogodjenih_0 == brojSegmenata)
+                {
+                    MessageBox.Show(String.Format("Bravo šefe \nPobednik je {0}", player0));
+                }
+            }
+            else
+            {
+                if (brojPogodjenih_1 == brojSegmenata)
+                {
+                    MessageBox.Show(String.Format("Bravo šefe \nPobednik je {0}", player1));
+                }
+            }
+        }
+
     }
 }
