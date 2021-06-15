@@ -19,17 +19,18 @@ namespace Battleship
         public event EventHandler play;
         Engine engine;
 
+
         public Setup(Engine engine)
         {
             InitializeComponent();
-            this.engine = engine;      
+            this.engine = engine;
         }
 
         public void btnPlay_Click(object sender, RoutedEventArgs e)
         {
             engine.NapraviMatricu();
-            engine.player0 = txtLetterInput.Text.Trim();
-            engine.player1 = txtLetterInput_Copy.Text.Trim();
+            engine.player0 = (txtLetterInput.Text.Trim() == "") ? "Player 1" : txtLetterInput.Text.Trim();
+            engine.player1 = (txtLetterInput_Copy.Text.Trim() == "") ? "Player 2" : txtLetterInput_Copy.Text.Trim();
             play(this, e);
         }
 

@@ -4,14 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Battleship"
-        mc:Ignorable ="d" d:DesignHeight="324">
-    <Grid HorizontalAlignment="Left" Margin="0,0,0,0" Width="350">
-        <Button x:Name="btnPlay" Content="Play" HorizontalAlignment="Center" Height="42" Margin="106,146,123,0" Click="btnPlay_Click" Width="94" VerticalAlignment="Top" FontFamily="Stencil" FontSize="14.667" FontWeight="Bold" Background="#FF5284C0" BorderBrush="#FFC1C0E8" Foreground ="White" IsDefault="True"/>
-        <Label x:Name="lblDifficulty" Content="Izaberite velicinu polja" HorizontalAlignment="Center" Margin="54,40,53,0" VerticalAlignment="Top" FontFamily="Stencil" FontSize="14.667" Foreground="#FF5284C0" Height="58" Width="216"/>
-        <RadioButton x:Name="velicina_8" Click="velicina_8_Click" Content="8x8" Margin="32,104,217,0" VerticalAlignment="Top" IsChecked="True" HorizontalAlignment="Center" Width="74" FontFamily="Stencil" FontSize="13.667" />
-        <RadioButton x:Name="velicina_10" Click="velicina_10_Click" Content="10x10" Margin="111,104,105,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="107" FontFamily="Stencil" FontSize="13.667" RenderTransformOrigin="0.513,1.115"/>
-        <RadioButton x:Name="velicina_12" Click="velicina_12_Click" Content="12x12" Margin="206,104,10,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="107" FontFamily="Stencil" FontSize="13.667"/>
-        <TextBox Height="31" HorizontalAlignment="Left" Margin="93,212,0,0" Name="txtLetterInput" VerticalAlignment="Top" Width="150" FontSize="20" Text="" />
-        <TextBox Height="31" HorizontalAlignment="Left" Margin="92,263,0,0" x:Name="txtLetterInput_Copy" VerticalAlignment="Top" Width="150" FontSize="20" Text="" />
+        mc:Ignorable ="d" d:DesignHeight="1080" d:DesignWidth="1920">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" Width="1920" Height="1080">
+        <Button x:Name="btnPlay" Content="Play" HorizontalAlignment="Center" VerticalAlignment="Center" Height="42" Margin="0,0,0,0" Click="btnPlay_Click" Width="94" FontFamily="Stencil" FontSize="14.667" FontWeight="Bold" Background="#FF5284C0" BorderBrush="#FFC1C0E8" Foreground ="White" IsDefault="True" RenderTransformOrigin="0.564,6.19"/>
+        <Label x:Name="lblDifficulty" Content="  Izaberite velicinu polja" HorizontalAlignment="Center" Margin="691,271,670,751" VerticalAlignment="Center" FontFamily="Stencil" FontSize="40" Foreground="#FF5284C0" Height="58" Width="559"/>
+        <RadioButton x:Name="velicina_8" Click="velicina_8_Click" Content="8x8" Margin="827,343,1016,0" VerticalAlignment="Top" IsChecked="True" HorizontalAlignment="Center" Width="77" FontFamily="Stencil" FontSize="13" Height="14" />
+        <RadioButton x:Name="velicina_10" Click="velicina_10_Click" Content="10x10" Margin="910,343,896,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="114" FontFamily="Stencil" FontSize="13" Height="14" />
+        <RadioButton x:Name="velicina_12" Click="velicina_12_Click" Content="12x12" Margin="1011,343,795,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="114" FontFamily="Stencil" FontSize="13" Height="14"/>
+        <TextBox Height="38" HorizontalAlignment="Left" Margin="838,397,0,0" Name="txtLetterInput" VerticalAlignment="Top" Width="244" FontSize="20" Text="" />
+        <TextBox Height="40" HorizontalAlignment="Left" Margin="838,460,0,0" x:Name="txtLetterInput_Copy" VerticalAlignment="Top" Width="244" FontSize="20" Text="" />
     </Grid>
 </UserControl>

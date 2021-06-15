@@ -8,11 +8,13 @@
              d:DesignHeight="1080" d:DesignWidth="1920">
     <Grid >
         <Grid x:Name="grid_0">
-            <Label x:Name="ispisIgraca"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="42" Width="186" Margin="1510,344,0,0" FontSize="20"/>
+            <Label x:Name="ispisIgraca"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="42" Width="186" Margin="1510,344,0,0" FontSize="30"/>
+            <Label x:Name="ispisBrojac"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="42" Width="186" Margin="1510,663,0,0" FontSize="30"/>
         </Grid>
 
         <Grid x:Name="grid_1">
-            <Label x:Name="ispisIgraca1"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="42" Width="186" Margin="1510,344,0,0" FontSize="20"/>
+            <Label x:Name="ispisIgraca1"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="42" Width="186" Margin="1510,344,0,0" FontSize="30"/>
+            <Label x:Name="ispisBrojac1"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="42" Width="186" Margin="1510,557,0,0" FontSize="30"/>
         </Grid>
     </Grid>
 </UserControl>

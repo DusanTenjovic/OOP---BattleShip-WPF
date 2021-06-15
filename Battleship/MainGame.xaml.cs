@@ -35,6 +35,8 @@ namespace Battleship
             this.engine = engine;
             ispisIgraca.Content = engine.player0;
             ispisIgraca1.Content = engine.player1;
+            ispisBrojac.Content = engine.igracNaPotezu;
+            ispisBrojac1.Content = engine.igracNaPotezu;
             postaviDugmice(engine.velicina);
             grid_0.Visibility = Visibility.Visible;
             grid_1.Visibility = Visibility.Hidden;
@@ -48,7 +50,7 @@ namespace Battleship
                 for (int j = 0; j < velicina; j++)
                 {
                     Button b = InicijalizacijaDugmeta(vel, i, j);
-                    Button b1 = InicijalizacijaDugmeta(vel + 5, i, j);
+                    Button b1 = InicijalizacijaDugmeta(vel, i, j);
 
                     b.Click += btnClick;
                     b1.Click += btnClick_1;
@@ -93,6 +95,8 @@ namespace Battleship
                 grid_1.Visibility = grid_1.Visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
                 ispisIgraca.Content = engine.player0;
                 ispisIgraca1.Content = engine.player1;
+                ispisBrojac.Content = engine.igracNaPotezu;
+                ispisBrojac1.Content = engine.igracNaPotezu;
 
             }
 
@@ -116,7 +120,9 @@ namespace Battleship
                 grid_0.Visibility = grid_0.Visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
                 grid_1.Visibility = grid_1.Visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
                 ispisIgraca.Content = engine.player0;
-                ispisIgraca1.Content = engine.player1; 
+                ispisIgraca1.Content = engine.player1;
+                ispisBrojac.Content = engine.igracNaPotezu;
+                ispisBrojac1.Content = engine.igracNaPotezu;
             }
             engine.ProveriZaKraj();
         }        

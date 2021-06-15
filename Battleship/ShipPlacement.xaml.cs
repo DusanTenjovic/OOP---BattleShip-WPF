@@ -44,6 +44,7 @@ namespace Battleship
             play(this, e);
         }
 
+        int pamtiVel;
         void postaviDugmice(int velicina)
         {
             int vel = 70;
@@ -64,44 +65,17 @@ namespace Battleship
                     grid.Children.Add(b);
                     sviDugmici.Add(b);
                 }
+                pamtiVel = vel * i;
             }
         }
 
         void postaviBrodove(int velicina)
         {
-            if (velicina == 8)
-            {
-                nacrtajDugme2(1);
-                nacrtajDugme3(2);
-                nacrtajDugme4(3);
-                nacrtajDugme5(4);
-                nacrtajDugme6(5);
-            }
-            else if (velicina == 10)
-            {
-                nacrtajDugme2(1);
-                nacrtajDugme2(2);
-                nacrtajDugme2(3);
-                nacrtajDugme3(4);
-                nacrtajDugme3(5);
-                nacrtajDugme4(6);
-                nacrtajDugme5(7);
-            }
-            else if (velicina == 12)
-            {
-                nacrtajDugme2(1);
-                nacrtajDugme2(2);
-                nacrtajDugme3(3);
-                nacrtajDugme3(4);
-                nacrtajDugme4(5);
-                nacrtajDugme4(6);
-                nacrtajDugme5(7);
-                nacrtajDugme6(8);
-            }
-            else
-            {
-                MessageBox.Show("APOKALIPSA");
-            }
+            nacrtajDugme2(1);
+            nacrtajDugme3(2);
+            nacrtajDugme4(3);
+            nacrtajDugme5(4);
+            nacrtajDugme6(5);
         }
 
         private void btnClick(object sender, RoutedEventArgs e)
@@ -126,6 +100,7 @@ namespace Battleship
 
         private void postaviDebug(int velicina)
         {
+            int vel = 25;
             for (int i = 0; i < velicina; i++)
             {
                 for (int j = 0; j < velicina; j++)
@@ -136,7 +111,7 @@ namespace Battleship
                         Width = 20,
                         VerticalAlignment = 0,
                         HorizontalAlignment = 0,
-                        Margin = new Thickness(12 * screenWidth / 15 + vel * i, 10 * screenHeight / 15 + vel * j, 0, 0),
+                        Margin = new Thickness(12 * screenWidth / 15 + vel * i, 6 * screenHeight / 15 + vel * j, 0, 0),
                         Content = i.ToString(),
                         Background = engine.KojaJeZauzeta(i+1, j+1) ? Brushes.Red : Brushes.Blue
                     };
@@ -147,6 +122,7 @@ namespace Battleship
 
         private void postaviDebug_2(int velicina)
         {
+            int vel = 25;
             for (int i = 0; i < velicina; i++)
             {
                 for (int j = 0; j < velicina; j++)
@@ -157,7 +133,7 @@ namespace Battleship
                         Width = 20,
                         VerticalAlignment = 0,
                         HorizontalAlignment = 0,
-                        Margin = new Thickness(9 * screenWidth / 15 + vel * i, 10 * screenHeight / 15 + vel * j, 0, 0),
+                        Margin = new Thickness(9 * screenWidth / 15 + vel * i, 6 * screenHeight / 15 + vel * j, 0, 0),
                         Content = i.ToString(),
                         Background = engine.KojaJeBrodova(i+1, j+1) ? Brushes.Red : Brushes.Blue
                     };
@@ -167,20 +143,20 @@ namespace Battleship
         }
 
 
-        int duz = 850;
-        int vis = 252;
-        int vel = 30;
+        int duz = 900;
+        int vis = 400;
+        int Vel = 50;
         int razmak = 20;
 
         void nacrtajDugme2(int x)
         {
             Button b = new Button()
             {
-                Height = 2 * vel,
-                Width = vel,
+                Height = Vel,
+                Width = 2 * Vel,
                 VerticalAlignment = 0,
                 HorizontalAlignment = 0,
-                Margin = new Thickness(duz + x * vel + razmak * x, vis - x * vel, 0, 0),
+                Margin = new Thickness(pamtiVel + 250, vis - x * Vel * 1.2, 0, 0),
                 Content = "2"
             };
             b.Click += click_2;
@@ -193,11 +169,11 @@ namespace Battleship
         {
             Button b = new Button()
             {
-                Height = 3 * vel,
-                Width = vel,
+                Height =  Vel,
+                Width = 3 * Vel,
                 VerticalAlignment = 0,
                 HorizontalAlignment = 0,
-                Margin = new Thickness(duz + x * vel + razmak * x, vis - x * vel, 0, 0),
+                Margin = new Thickness(pamtiVel + 250, vis - x * Vel * 1.2, 0, 0),
                 Content = "3"
             };
             b.Click += click_3;
@@ -210,11 +186,11 @@ namespace Battleship
         {
             Button b = new Button()
             {
-                Height = 4 * vel,
-                Width = vel,
+                Height = Vel,
+                Width = 4 * Vel,
                 VerticalAlignment = 0,
                 HorizontalAlignment = 0,
-                Margin = new Thickness(duz + x * vel + razmak * x, vis - x * vel, 0, 0),
+                Margin = new Thickness(pamtiVel + 250, vis - x * Vel * 1.2, 0, 0),
                 Content = "4"
             };
             b.Click += click_4;
@@ -227,11 +203,11 @@ namespace Battleship
         {
             Button b = new Button()
             {
-                Height = 5 * vel,
-                Width = vel,
+                Height =  Vel,
+                Width = 5 * Vel,
                 VerticalAlignment = 0,
                 HorizontalAlignment = 0,
-                Margin = new Thickness(duz + x * vel + razmak * x, vis - x * vel, 0, 0),
+                Margin = new Thickness(pamtiVel + 250, vis - x * Vel * 1.2, 0, 0),
                 Content = "5"
             };
             b.Click += click_5;
@@ -244,11 +220,11 @@ namespace Battleship
         {
             Button b = new Button()
             {
-                Height = 6 * vel,
-                Width = vel,
+                Height =  Vel,
+                Width = 6 * Vel,
                 VerticalAlignment = 0,
                 HorizontalAlignment = 0,
-                Margin = new Thickness(duz + x * vel + razmak * x, vis - x * vel, 0, 0),
+                Margin = new Thickness(pamtiVel + 250, vis - x * Vel * 1.2, 0, 0),
                 Content = "6"
             };
             b.Click += click_6;

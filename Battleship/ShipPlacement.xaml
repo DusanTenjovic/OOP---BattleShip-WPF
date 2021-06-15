@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Battleship"
         mc:Ignorable="d">
     <Grid HorizontalAlignment="Left" x:Name="grid" Height="1080" Width="1920" >
-        <Button x:Name="btnNextPlayer" Content="Dalje" HorizontalAlignment="Center" Height="42" Margin="1562,457,264,0" Width="94" VerticalAlignment="Top" FontFamily="Stencil" FontSize="14.667" FontWeight="Bold" Background="#FF5284C0" BorderBrush="#FFC1C0E8" Foreground ="White" IsDefault="True"/>
-        <Label x:Name="ispisIgraca"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="42" Width="186" Margin="1510,344,0,0" FontSize="20"/>
+        <Button x:Name="btnNextPlayer" Content="Dalje" HorizontalAlignment="Center" Height="74" Margin="1652,854,129,0" Width="139" VerticalAlignment="Top" FontFamily="Stencil" FontSize="25" FontWeight="Bold" Background="#FF5284C0" BorderBrush="#FFC1C0E8" Foreground ="White" IsDefault="True"/>
+        <Label x:Name="ispisIgraca"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="70" Width="186" Margin="1652,77,0,0" FontSize="30"/>
         <!--<Button x:Name="UNDO" Content="UNDO" Click="UNDO_Click"  HorizontalAlignment="Center" Height="42" Margin="1562,579,264,0" Width="94" VerticalAlignment="Top" FontFamily="Stencil" FontSize="14.667" FontWeight="Bold" Background="#FF5284C0" BorderBrush="#FFC1C0E8" Foreground ="White" IsDefault="True"/>-->
     </Grid>
 </UserControl>

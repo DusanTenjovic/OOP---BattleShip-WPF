@@ -23,8 +23,8 @@ namespace Battleship
         public bool[,] matrica_brodova_0;
         public bool[,] matrica_brodova_1;
         
-        public string player0 = "Igrac 1";
-        public string player1 = "Igrac 2";
+        public string player0;
+        public string player1;
 
         int brojPogodjenih_0;
         int brojPogodjenih_1;
@@ -346,6 +346,7 @@ namespace Battleship
                 if (brojPogodjenih_0 == brojSegmenata)
                 {
                     MessageBox.Show(String.Format("Bravo šefe \nPobednik je {0}", player0));
+                    System.Windows.Application.Current.Shutdown();
                 }
             }
             else
@@ -353,9 +354,12 @@ namespace Battleship
                 if (brojPogodjenih_1 == brojSegmenata)
                 {
                     MessageBox.Show(String.Format("Bravo šefe \nPobednik je {0}", player1));
+                    System.Windows.Application.Current.Shutdown();
                 }
             }
         }
+
+        
 
         //void UokviriBrod(List<Polje> lista)
         //{
