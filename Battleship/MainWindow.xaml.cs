@@ -90,7 +90,7 @@ namespace Battleship
             mainGame = new MainGame(engine);
             grid.Children.Add(mainGame);
 
-            mainGame.play += new EventHandler(Igra);
+           // mainGame.play += new EventHandler(Igra);
         }
 
         //private void ponovo(object sender, EventArgs e)

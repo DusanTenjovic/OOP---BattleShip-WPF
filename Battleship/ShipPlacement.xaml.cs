@@ -37,9 +37,10 @@ namespace Battleship
 
         private void btnNextPlayer_CLick (object sender, RoutedEventArgs e)
         {
-            engine.UokviriBrod();
-            engine.igracNaPotezu++;
-            engine.NapraviMatricu();
+            engine.brojacPostavljenihPolja = 0;
+            engine.UokviriBrod(true);
+            engine.igracNaPotezu++;                  
+            engine.NapraviMatricu();           
             play(this, e);
         }
 
@@ -108,12 +109,17 @@ namespace Battleship
             Button button = (Button)sender;
             
             if (engine.PostaviDeoBroda((sviDugmici.IndexOf(button) / engine.velicina) + 1, (sviDugmici.IndexOf(button) % engine.velicina) + 1))
+            {
                 button.Background = Brushes.Gray;
-            engine.KompletanBrod();
-            //if (engine.ProveriZaKrajPostavljanja())
-            //{
+                engine.brojacPostavljenihPolja++;
+                engine.KompletanBrod();
+            }
 
-            //}            
+            if (engine.ProveriZaKrajPostavljanja())
+            {
+                btnNextPlayer.Click += btnNextPlayer_CLick;
+            }
+
             postaviDebug(engine.velicina);
             postaviDebug_2(engine.velicina);
         }
@@ -132,7 +138,7 @@ namespace Battleship
                         HorizontalAlignment = 0,
                         Margin = new Thickness(12 * screenWidth / 15 + vel * i, 10 * screenHeight / 15 + vel * j, 0, 0),
                         Content = i.ToString(),
-                        Background = engine.KojiJeIgrac(i+1, j+1) ? Brushes.Red : Brushes.Blue
+                        Background = engine.KojaJeZauzeta(i+1, j+1) ? Brushes.Red : Brushes.Blue
                     };
                     grid.Children.Add(b);
                 }
@@ -153,7 +159,7 @@ namespace Battleship
                         HorizontalAlignment = 0,
                         Margin = new Thickness(9 * screenWidth / 15 + vel * i, 10 * screenHeight / 15 + vel * j, 0, 0),
                         Content = i.ToString(),
-                        Background = engine.KojiJeBrod(i+1, j+1) ? Brushes.Red : Brushes.Blue
+                        Background = engine.KojaJeBrodova(i+1, j+1) ? Brushes.Red : Brushes.Blue
                     };
                     grid.Children.Add(b);
                 }
@@ -250,5 +256,13 @@ namespace Battleship
         }
 
         private void click_6(object sender, RoutedEventArgs e) => engine.PostaviBrod(6);
+
+        //private void UNDO_Click(object sender, RoutedEventArgs e)
+        //{
+        //    engine.Undo();
+  
+        //    postaviDebug(engine.velicina);
+        //    postaviDebug_2(engine.velicina);
+        //}
     }
 }
